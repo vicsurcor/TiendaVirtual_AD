@@ -1,14 +1,28 @@
 package es.masanz.tiendaVirtual.db;
 
+import es.masanz.tiendaVirtual.Main;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
 public class TransactionManager {
 
-    private final String properties = "TiendaVirtual/resources/db/db.properties";
+    private final File properties;
+
+    {
+        try {
+            properties = (Paths.get(Main.class.getResource("/db/db.properties").toURI()).toFile());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public String name;
     public Connection connection;
@@ -92,7 +106,7 @@ public class TransactionManager {
         try {
 
             PreparedStatement stmt = connection.prepareStatement(update);
-            stmt.executeLargeUpdate();
+            stmt.executeUpdate();
             return true;
 
         } catch (Exception e) {

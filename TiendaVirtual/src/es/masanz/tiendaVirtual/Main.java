@@ -15,15 +15,9 @@ public class Main {
 
         TransactionManager transactionManager = new TransactionManager("tiendavirtual");
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        URL url = Main.class.getResource("/sql/insertBlueprint.sql");
-        File file;
-        try {
-            assert url != null;
-            file = Paths.get(url.toURI()).toFile();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(usuarioDAO.crearUsuario(transactionManager.name,file));
+        System.out.println(usuarioDAO.crearUsuario(transactionManager.name,"insertBlueprint"));
+        System.out.println(usuarioDAO.borrarUsuario(transactionManager.name, "deleteBlueprint"));
+
         transactionManager.close();
 
     }
