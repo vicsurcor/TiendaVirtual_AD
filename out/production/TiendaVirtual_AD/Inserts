@@ -1,5 +1,4 @@
-INSERT INTO usuarios ("full_name", "user", "email", "password", "creation_date", "modification_date")
-VALUES (('John Doe', 'User1', 'user1@example.com', 'password1', '2024-01-01', '2024-01-01'),
+('John Doe', 'User1', 'user1@example.com', 'password1', '2024-01-01', '2024-01-01'),
 ('Jane Smith', 'User2', 'user2@example.com', 'password2', '2024-01-02', '2024-01-02'),
 ('Bob Johnson', 'User3', 'user3@example.com', 'password3', '2024-01-03', '2024-01-03'),
 ('Alice Williams', 'User4', 'user4@example.com', 'password4', '2024-01-04', '2024-01-04'),
@@ -18,4 +17,4 @@ VALUES (('John Doe', 'User1', 'user1@example.com', 'password1', '2024-01-01', '2
 ('Olivia Martin', 'User17', 'user17@example.com', 'password17', '2024-01-17', '2024-01-17'),
 ('Peter Thompson', 'User18', 'user18@example.com', 'password18', '2024-01-18', '2024-01-18'),
 ('Quincy Garcia', 'User19', 'user19@example.com', 'password19', '2024-01-19', '2024-01-19'),
-('Rachel Martinez', 'User20', 'user20@example.com', 'password20', '2024-01-20', '2024-01-20'));
+('Rachel Martinez', 'User20', 'user20@example.com', 'password20', '2024-01-20', '2024-01-20');

@@ -14,17 +14,13 @@ import java.util.stream.Collectors;
 
 public class UsuarioDAO {
 
-    String operacion;
-
-
     public UsuarioDAO(){
 
     }
 
 
-    public boolean crearUsuario(String database){
+    public boolean crearUsuario(String database, File file){
         TransactionManager transactionManager = new TransactionManager(database);
-        File file = new File("resources/insertBlueprint.sql");
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(file));
             String sqlUpdate = fileReader.lines().collect(Collectors.joining("\n"));

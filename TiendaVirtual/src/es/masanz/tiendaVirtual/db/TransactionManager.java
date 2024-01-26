@@ -1,14 +1,5 @@
 package es.masanz.tiendaVirtual.db;
 
-import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
-import net.sf.jsqlparser.parser.CCJSqlParserUtil;
-import net.sf.jsqlparser.statement.delete.Delete;
-import net.sf.jsqlparser.statement.insert.Insert;
-
-import net.sf.jsqlparser.statement.update.Update;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -17,10 +8,10 @@ import java.util.Properties;
 
 public class TransactionManager {
 
-    private final String properties = "resources/db.properties";
+    private final String properties = "TiendaVirtual/resources/db/db.properties";
 
     public String name;
-    public static Connection connection;
+    public Connection connection;
 
     public TransactionManager(String name){
 
@@ -99,50 +90,19 @@ public class TransactionManager {
 
     public boolean executeSqlUpdate(String update) {
         try {
-            Statement statement = (Statement) CCJSqlParserUtil.parse(update);
-            if (statement instanceof Update) {
-                Update updateStatement = (Update) statement;
-                List<Expression> expressions = updateStatement.getExpressions();
-                PreparedStatement stmt = connection.prepareStatement(update);
-                for (int i = 0; i < expressions.size(); i++) {
-                    stmt.setString(i + 1, expressions.get(i).toString());
-                }
-                int rowsUpdated = stmt.executeUpdate();
-                return rowsUpdated > 0;
-            } else if (statement instanceof Insert) {
-                Insert insertStatement = (Insert) statement;
-                String values = insertStatement.toString().split("VALUES")[1];
-                if (!values.contains("),")) {
-                    String[] expressions = values.replace("(", "").replace(")", "").split(",");;
-                    PreparedStatement stmt = connection.prepareStatement(update);
-                    for (int i = 0; i < expressions.length; i++) {
-                        // Handle expressions
-                        stmt.setString(i + 1, expressions[i].trim());
-                    }
-                } else if (values.contains("),")) {
-                    // Handle multi-expressions
-                    String[] expressions = values.split("),");
 
-                }
-                int rowsUpdated = stmt.executeUpdate();
-                return rowsUpdated > 0;
-            }
-            else if (statement instanceof Delete) {
-                Delete deleteStatement = (Delete) statement;
-                Expression expressions = deleteStatement.getWhere();
-                PreparedStatement stmt = connection.prepareStatement(update);
-                stmt.setString( 1, expressions.toString());
+            PreparedStatement stmt = connection.prepareStatement(update);
+            stmt.executeLargeUpdate();
+            return true;
 
-                int rowsUpdated = stmt.executeUpdate();
-                return rowsUpdated > 0;
-            }
-        } catch (JSQLParserException | SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return false;
     }
 
-    public  void close() {
+    public void close() {
         try {
             if (connection != null) {
                 connection.close();
