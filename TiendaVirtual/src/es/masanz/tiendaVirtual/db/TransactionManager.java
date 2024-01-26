@@ -18,7 +18,7 @@ public class TransactionManager {
 
     {
         try {
-            properties = (Paths.get(Main.class.getResource("/db/db.properties").toURI()).toFile());
+            properties = (Paths.get(TransactionManager.class.getResource("/db/db.properties").toURI()).toFile());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

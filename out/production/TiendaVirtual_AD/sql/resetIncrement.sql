@@ -1,0 +1,1 @@
+alter table usuarios auto_increment = 0;
