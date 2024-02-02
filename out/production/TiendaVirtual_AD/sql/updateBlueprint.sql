@@ -1,0 +1,1 @@
+Update usuarios set fullName = ?, email = ?, password = ?, modDate = ? where fullName = ?
