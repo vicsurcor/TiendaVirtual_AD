@@ -21,16 +21,31 @@ import java.util.stream.Collectors;
 public class UsuarioDAO {
 
     private String urlBase = "/sql/";
+    private String urlBaseData = "/valores/";
     private TransactionManager transactionManager;
     private final String extension = ".sql";
-    public UsuarioDAO(){
-
-    }
-    public boolean crearUsuario(String database, String filename){
-        String sql = getTransactionInstructions(database, filename);
+    public boolean crearUsuario(String database, String filename, UsuarioDTO usuarioDTO){
+        String sql;
+        sql = getTransactionInstructions(database, filename);
+        sql += " ('" + usuarioDTO.getFullName() + "', '" + usuarioDTO.getEmail() + "', '" + usuarioDTO.getPassword() + "', '" + usuarioDTO.getCreationDate() + "', '" + usuarioDTO.getModificationDate() + "');";
         return transactionManager.executeSqlUpdate(sql);
     }
-    public boolean borrarUsuario(String database, String filename){
+    public boolean crearUsuarios(String database, String filename, String data) {
+        String sql;
+        sql = getTransactionInstructions(database, filename);
+        sql += " ";
+        try {
+            File file = (Paths.get(UsuarioDAO.class.getResource(urlBaseData + data).toURI()).toFile());
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            Iterator<String> iterator = bufferedReader.lines().iterator();
+            while (iterator.hasNext())
+                sql += iterator.next();
+        } catch (FileNotFoundException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return transactionManager.executeSqlUpdate(sql);
+    }
+    public boolean borrarUsuarios(String database, String filename){
         String sql;
         sql = getTransactionInstructions(database, filename);
         transactionManager.executeSqlUpdate(sql);

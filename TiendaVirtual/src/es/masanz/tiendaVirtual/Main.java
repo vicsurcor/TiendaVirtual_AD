@@ -15,7 +15,9 @@ public class Main {
     public static void main(String[] args) {
 
         TransactionManager transactionManager = new TransactionManager("tiendavirtual");
-
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        System.out.println(usuarioDAO.crearUsuario(transactionManager.name,"insertBlueprint", new UsuarioDTO("Eh","Ehh","ehhh@gmail.com", "ehh21")));
+        System.out.println(usuarioDAO.crearUsuarios(transactionManager.name, "insertBlueprint", "insertsUsuarios"));
 
 
         transactionManager.close();
