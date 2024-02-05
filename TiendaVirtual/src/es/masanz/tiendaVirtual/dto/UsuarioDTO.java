@@ -68,6 +68,7 @@ public class UsuarioDTO {
 
 
     public Date getModificationDate() {
+
         return modificationDate;
     }
 

@@ -19,4 +19,5 @@ VALUES
 ('Olivia Martin', 'user17@example.com', 'password17', '2024-01-17', '2024-01-17'),
 ('Peter Thompson', 'user18@example.com', 'password18', '2024-01-18', '2024-01-18'),
 ('Quincy Garcia', 'user19@example.com', 'password19', '2024-01-19', '2024-01-19'),
-('Rachel Martinez', 'user20@example.com', 'password20', '2024-01-20', '2024-01-20');
+('Rachel Martinez', 'user20@example.com', 'password20', '2024-01-20', '2024-01-20'),
+('Antonio', 'rrevreq@gmail.com', '12ff43', '2000-01-21', '2020-12-11');

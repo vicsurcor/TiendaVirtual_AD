@@ -42,10 +42,15 @@ public class UsuarioDAO {
 
         String sql;
         int count = 0;
-        String[] strings = new String[]{fullName,email,password, usuario.getFullName()};
+        usuario.setModificationDate();
+        String[] strings = new String[]{fullName, email, password,usuario.getModificationDate().toString() , usuario.getFullName()};
         sql = getTransactionInstructions(database, filename);
-        for (int i = 0; i < sql.length(); i++)
-        
+        while (count < strings.length){
+
+            sql = sql.replaceFirst("\\?","'" +  strings[count] + "'");
+            count++;
+
+        }
         return transactionManager.executeSqlUpdate(sql);
 
 
